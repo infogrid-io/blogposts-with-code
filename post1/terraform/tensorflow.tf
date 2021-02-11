@@ -19,7 +19,7 @@ resource "aws_ecs_cluster" "tensorflow" {
 # Task Definition
 resource "aws_ecs_task_definition" "tensorflow" {
   container_definitions = templatefile("container_definitions/tensorflow.json", {
-    tensorflow_image              = var.config.tensorflow_image #docker_image.tensorflow_serving.latest #
+    tensorflow_image              = var.config.tensorflow_image
     ecs_security_group            = aws_security_group.tensorflow.arn
     subnets                       = join(",", aws_subnet.private.*.id)
     awslogs_group                 = var.config.tensorflow_awslogs_group

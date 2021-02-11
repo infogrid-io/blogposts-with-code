@@ -2,12 +2,11 @@
 # tensorflow VPC
 resource "aws_vpc" "tensorflow" {
   cidr_block           = var.config.vpc_cidr_block
-  enable_dns_support   = true /* Required for PrivateLink */
-  enable_dns_hostnames = true /* Required for PrivateLink */
+  enable_dns_support   = true
+  enable_dns_hostnames = true
 }
 
 # Public Subnets
-# Hack: route association (below) can't take a list of strings
 resource "aws_subnet" "public" {
   vpc_id            = aws_vpc.tensorflow.id
   count             = length(var.config.subnet_cidrs_public)
@@ -97,7 +96,6 @@ resource "aws_internet_gateway" "gateway" {
   vpc_id = aws_vpc.tensorflow.id
 }
 
-
 # Private Route Table
 resource "aws_route_table" "private" {
   vpc_id = aws_vpc.tensorflow.id
@@ -107,6 +105,7 @@ resource "aws_route_table" "private" {
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.tensorflow.id
 }
+
 # Route
 resource "aws_route" "public_internet_gateway" {
   route_table_id         = aws_route_table.public.id
@@ -132,5 +131,4 @@ resource "aws_route_table_association" "private" {
 resource "aws_main_route_table_association" "route_association" {
   vpc_id         = aws_vpc.tensorflow.id
   route_table_id = aws_route_table.public.id
-
 }
