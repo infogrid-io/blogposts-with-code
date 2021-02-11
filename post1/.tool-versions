@@ -1,0 +1,3 @@
+# This file controls the version of tools that will run if you have
+# asdf-vm installed. See https://asdf-vm.com/ for more information.
+terraform 0.14.2
