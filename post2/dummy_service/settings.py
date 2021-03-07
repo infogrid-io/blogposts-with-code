@@ -1,0 +1,6 @@
+from os import getenv
+
+LOG_LEVEL = getenv("LOG_LEVEL")
+MODEL_NAME = getenv("MODEL_NAME")
+TENSORFLOW_DNS = getenv("TENSORFLOW_DNS")
+TENSORFLOW_PORT = getenv("TENSORFLOW_PORT")

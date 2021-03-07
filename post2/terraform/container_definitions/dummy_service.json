@@ -1,0 +1,38 @@
+[
+    {
+      "name": "dummy",
+      "image": "${dummy_image}",
+      "memoryReservation": ${memoryReservation},
+      "essential": true,
+      "command": [
+        "python","run_worker.py"
+      ],
+      "portMappings": [],
+      "environment": [
+        {
+          "name": "LOG_LEVEL",
+          "value": "${log_level}"
+        },
+        {
+          "name": "TENSORFLOW_DNS",
+          "value": "${tensorflow_dns}"
+        },
+        {
+          "name": "TENSORFLOW_PORT",
+          "value": "${tensorflow_port}"
+        },
+        {
+          "name": "MODEL_NAME",
+          "value": "${model_name}"
+        }
+      ],
+      "logConfiguration": {
+          "logDriver": "awslogs",
+          "options": {
+              "awslogs-group": "${awslogs_group}",
+              "awslogs-region": "${region}",
+              "awslogs-stream-prefix": "ecs"
+          }
+      }
+    }
+  ]

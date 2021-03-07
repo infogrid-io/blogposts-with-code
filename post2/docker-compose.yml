@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+
+  dummy_service:
+    build:
+      context: ./dummy_service/
+      dockerfile: Dockerfile
+    environment:
+      - TENSORFLOW_DNS=tensorflow_service
+      - TENSORFLOW_PORT=8501
+      - MODEL_NAME=empty_model
+      - LOG_LEVEL=INFO
+    depends_on:
+      - tensorflow_service
+    restart: unless-stopped
+    networks:
+      - tensorflow-network
+
+  tensorflow_service:
+    image: tensorflow/serving:2.4.0
+    container_name: tensorflow_service
+    command: --port=8500 --rest_api_port=8501 --model_name=empty_model --model_base_path=/models/empty_model
+    volumes:
+      - ./empty_model:/models/empty_model
+    restart: unless-stopped
+    networks:
+      - tensorflow-network
+
+networks:
+  tensorflow-network:
+    external: true
