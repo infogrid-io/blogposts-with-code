@@ -12,8 +12,8 @@ config = {
   memory                        = 1024,
   memoryReservation             = 1024,
   model_version_polling_seconds = 600,
-  tensorflow_image              = "091490437432.dkr.ecr.eu-west-1.amazonaws.com/tensorflow_inference:2.3.0-cpu-py37-ubuntu18.04" #"${path to tensorflow/serving:2.4.0 stored in your own ECR}$"
-  dummy_image                   = "091490437432.dkr.ecr.eu-west-1.amazonaws.com/analytics:aidans_branch.v1"                      #"${path to dummy_service image stored in your own ECR}$"
+  tensorflow_image              = "${path to tensorflow/serving:2.4.0 stored in your own ECR}$"
+  dummy_image                   = "${path to dummy_service image stored in your own ECR}$"
   region                        = "eu-west-1"
   tensorflow_port               = 8888
 
